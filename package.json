@@ -18,7 +18,7 @@
     "passport": "^0"
   },
   "devDependencies": {
-    "@sap/cds": "^6.8.4",
+    "@sap/cds": "^7.1.2",
     "@sap/cds-dk": "^7",
     "@sap/ux-specification": "^1.108.12",
     "sqlite3": "^5.0.4"
