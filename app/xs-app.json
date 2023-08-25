@@ -2,9 +2,9 @@
   "welcomeFile": "app/index.html",
   "routes": [
     {
-      "source": "^/app/(.*)$",      
+      "source": "^/app/(.*)$",
       "localDir": "./",
-      "target": "$1"      
+      "target": "$1"
     },
     {
       "source": "^/service/(.*)$",

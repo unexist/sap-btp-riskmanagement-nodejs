@@ -1,4 +1,4 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: risk-management
 version: 2.0.0
 description: "Template for the Learning Journey Building side-by-side extensions on SAP BTP"
@@ -8,7 +8,8 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm install @sap/cds
+        - npm install -g @sap/cds
+        - npm install -g @sap/cds-dk
         - npx cds build --production
 modules:
   - name: risk-management-srv
@@ -17,9 +18,11 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
     build-parameters:
-      builder: npm
+      builder: custom
       commands:
         - npm install @sap/cds
+        - npm install -g @sap/cds-dk
+        - npm install --production
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
@@ -35,7 +38,8 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
     build-parameters:
-      ignore: [ ".env" ]
+      ignore:
+        - ".env"
     requires:
       - name: risk-management-db
 
@@ -65,9 +69,16 @@ resources:
       config:
         xsappname: risk-management-${org}-${space}
         tenant-mode: dedicated
-        oauth2-configuration:
-          redirect-uris:
-            - https:///login/callback
+        role-collections:
+          - name: "RiskManager-${space}"
+            description: Manage Risks
+            role-template-references:
+              - $XSAPPNAME.RiskManager
+          - name: "RiskViewer-${space}"
+            description: View Risks
+            role-template-references:
+              - $XSAPPNAME.RiskViewer
+
   - name: risk-management-db
     type: com.sap.xs.hdi-container
     parameters:
