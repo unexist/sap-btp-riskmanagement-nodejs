@@ -4,7 +4,7 @@
   "description": "RiskManagement - nodejs",
   "author": "christoph@unexist.dev",
   "license": "Apache-2.0",
-  "repository": "https://github.com/SAP-samples/sap-learning-extension-suite",
+  "repository": "https://github.com/unexist/sap-btp-riskmanagement-nodejs.git",
   "engines": {
     "node": ">=14"
   },
